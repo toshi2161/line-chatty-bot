@@ -7,7 +7,7 @@ const config = {
 };
 
 const app = express();
-app.use(express.json());
+
 
 app.post('/callback', line.middleware(config), (req, res) => {
   console.log('受信イベント:', req.body.events);
