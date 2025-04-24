@@ -19,10 +19,27 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 });
 
 async function handleEvent(event) {
+  const replyToken = event.replyToken;
+
+  // 友だち追加時のあいさつ
+  if (event.type === 'follow') {
+    return client.replyMessage(replyToken, {
+      type: 'text',
+      text: 'はじめまして！TOSHI EXPOへようこそ。\n「こんにちは」または「旅に出たい」と話しかけてみてね。'
+    });
+  }
+
   if (event.type !== 'message' || event.message.type !== 'text') return null;
 
   const msg = event.message.text.trim();
-  const replyToken = event.replyToken;
+
+  const keyMap = {
+    '1': '1', '①': '1',
+    '2': '2', '②': '2',
+    '3': '3', '③': '3',
+    '4': '4', '④': '4'
+  };
+  const key = keyMap[msg];
 
   if (msg.includes('こんにちは') || msg.includes('旅')) {
     return client.replyMessage(replyToken, {
@@ -58,8 +75,6 @@ async function handleEvent(event) {
       'Opus：「見つめた分だけ、優しくなれる。」'
     ]
   };
-
-  const key = msg.replace(/[^1-4]/g, ''); // ①～④の数字だけ抜き出す
 
   if (routes[key]) {
     const messages = routes[key].map(text => ({ type: 'text', text }));
