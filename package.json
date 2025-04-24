@@ -1,0 +1,12 @@
+{
+  "name": "line-chatty-bot",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "@line/bot-sdk": "^7.5.0"
+  }
+}
