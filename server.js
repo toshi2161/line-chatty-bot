@@ -97,7 +97,7 @@ async function handleTravelMode(msg, replyToken) {
 
 async function handleOpusTalk(msg, replyToken) {
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // 1秒待機
+    await new Promise(resolve => setTimeout(resolve, 8000)); // 8秒待機
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
       model: 'gpt-3.5-turbo',
       messages: [
